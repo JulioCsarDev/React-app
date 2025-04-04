@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { toAbsoluteUrl } from "../../utils/Assets";
+import { Children } from "react";
 
 export const Sidebar = () => {
   const menuItems = [
@@ -11,20 +12,36 @@ export const Sidebar = () => {
     },
     {
       id: 2,
-      title: "Usuarios",
-      path: "/users",
-      icon: "people",
+      title: "Distribucion",
+      Clildren: [
+        { id: 1, title: "Empleados", path: "/employees", icon: "people" },
+      ],
     },
     {
       id: 3,
-      title: "Empleados",
-      path: "/empleados",
+      title: "Flota",
+      Children: [
+        { id: 1, title: "Vehiculos", path: "/vehicles", icon: "car-front" },
+        { id: 2, title: "Conductores", path: "/drivers", icon: "person" },
+      ],
+    },
+    {
+      id: 3,
+      title: "SST",
+      Children: [
+        { id: 1, title: "Botiquin", path: "/kit", icon: "" },
+        { id: 2, title: "Cajas Fuertes", path: "/safe", icon: "" },
+      ],
+    },
+    {
+      id: 2,
+      title: "Usuarios",
+      path: "users",
       icon: "people",
     },
     {
       id: 4,
       title: "Reportes",
-      path: "/download_file_employees",
       icon: "file-earmark-arrow-down",
     },
   ];
@@ -43,15 +60,75 @@ export const Sidebar = () => {
         </div>
         <div className="d-flex flex-column pt-4" style={{ height: "80%" }}>
           {menuItems.map((item) => (
-            <Link
-              key={item.id}
-              to={item.path}
-              className="d-flex text-decoration-none text-white mx-2 my-2 p-2 btn-hover-success"
-              style={{}}
-            >
-              <i className={`bi bi-${item.icon} mx-2`}></i>
-              <span>{item.title}</span>
-            </Link>
+            <>
+              {item.Children ? (
+                <div key={item.id} className="dropdown">
+                  <button
+                    className="btn btn-outline-secondary text-white dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i className={`bi bi-${item.icon} pe-2`}></i>
+                    {item.title}
+                  </button>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    {item.Children.map((child) => (
+                      <li key={child.id}>
+                        <Link
+                          to={child.path}
+                          className="dropdown-item text-white"
+                        >
+                          <ul
+                            className="collapse show nav flex-column ms-1"
+                            id="submenu1"
+                            data-bs-parent="#menu"
+                          >
+                            <li className="w-100">
+                              <a href="#" className="nav-link px-0">
+                                {" "}
+                                <span className="d-none d-sm-inline">
+                                  {child.title}
+                                </span>
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#" className="nav-link px-0">
+                                {" "}
+                                <span className="d-none d-sm-inline">
+                                  {child.title}
+                                </span>
+                              </a>
+                            </li>
+                          </ul>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : item.path ? (
+                <Link
+                  key={item.id}
+                  to={item.path}
+                  className="btn btn-outline-secondary text-white mb-2"
+                >
+                  <i className={`bi bi-${item.icon} pe-2`}></i>
+                  {item.title}
+                </Link>
+              ) : (
+                <button
+                  key={item.id}
+                  className="btn btn-outline-secondary text-white mb-2"
+                >
+                  <i className={`bi bi-${item.icon} pe-2`}></i>
+                  {item.title}
+                </button>
+              )}
+            </>
           ))}
         </div>
         <div
