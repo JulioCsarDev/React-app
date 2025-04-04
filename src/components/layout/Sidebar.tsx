@@ -41,6 +41,12 @@ export const Sidebar = () => {
     },
     {
       id: 4,
+      title: "Vehiculos",
+      path: "/vehiculos",
+      icon: "car-front-fill",
+    },
+    {
+      id: 5,
       title: "Reportes",
       icon: "file-earmark-arrow-down",
     },
