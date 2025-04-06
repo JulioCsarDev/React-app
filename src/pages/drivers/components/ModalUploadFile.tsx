@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { queryClient } from "../../../providers";
 import { toAbsoluteUrl } from "../../../utils/Assets";
-import { UploadFile } from "../services/employees.services";
+import { UploadFile } from "../services/drivers.services";
 
 export const ModalUploadFile = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,7 +69,7 @@ export const ModalUploadFile = () => {
           handleRemoveFile();
 
           queryClient.invalidateQueries({
-            queryKey: ["employees"],
+            queryKey: ["drivers"],
           });
 
           Swal.fire({
@@ -128,8 +128,8 @@ export const ModalUploadFile = () => {
             >
               <div className="card-body d-flex justify-content-center align-items-center flex-column">
                 <img src={toAbsoluteUrl("/media/excelModal.png")} />
-                <h4>Lista de Empleados</h4>
-                <span>Archivo de Empleados</span>
+                <h4>Lista de Conductores</h4>
+                <span>Archivo de Conductores</span>
               </div>
               <input
                 className="d-none"

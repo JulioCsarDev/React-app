@@ -3,8 +3,9 @@ import { Route, Routes } from "react-router";
 import { Main } from "../components/layout/main/Main";
 import { BasePage } from "../pages/base/BasePage";
 import { UsersPage } from "../pages/users/UsersPage";
-import { ConductoresPage } from "../pages/products/ConductoresPage";
+import { ConductoresPage } from "../pages/drivers/ConductoresPage";
 import { VehiculosPage } from "../pages/vehiculos/VehiculosPages";
+import { EmployeesPage } from "../pages/products/EmployeesPage";
 
 export const AppRoutingSetup = (): ReactElement => {
   return (
@@ -12,8 +13,9 @@ export const AppRoutingSetup = (): ReactElement => {
       <Route element={<Main />}>
         <Route path="/" element={<BasePage />} />
         <Route path="/users" element={<UsersPage />} />
-        <Route path="/conductores" element={<ConductoresPage />} />
+        <Route path="/drivers" element={<ConductoresPage />} />
         <Route path="/vehiculos" element={<VehiculosPage />} />
+        <Route path="/employees" element={<EmployeesPage />} />
       </Route>
     </Routes>
   );

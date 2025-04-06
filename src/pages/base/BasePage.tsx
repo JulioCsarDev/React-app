@@ -11,17 +11,24 @@ export const BasePage = () => {
     },
     {
       id: 2,
-      title: " Conductores",
+      title: " Distribución",
       path: "/conductores",
-      icon: "people",
+      icon: "grid",
     },
     {
       id: 3,
-      title: " Vehiculos",
-      path: "/conductores",
+      title: " Flota",
+      path: "/vehicles",
       icon: "car-front-fill",
     },
+    {
+      id: 4,
+      title: " SST",
+      path: "/sst",
+      icon: "shield-lock",
+    },
   ];
+
   return (
     <Container>
       <h4 className="pb-4">Hola, Bienvenido</h4>

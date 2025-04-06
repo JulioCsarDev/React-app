@@ -14,16 +14,30 @@ import { useEmployees } from "./hooks/useEmployees";
 import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
 import { ModalUploadFile } from "./components/ModalUploadFile";
+import { ModalNewEmployee } from "./components/ModalNewEmployee";
+import { UpdateEmployeesModel } from "./models/employees.models";
+import { ModalUpdateEmployee } from "./components/ModalUploadEmployees";
 
-export const ConductoresPage = () => {
+export const EmployeesPage = () => {
   const { data: Employees } = useEmployees();
 
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const [selectedEmployees, setSelectedEmployees] = useState<UpdateEmployeesModel | null>(
+    null
+  );
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickEdit = (employees: UpdateEmployeesModel) => {
+    setSelectedEmployees(employees);
+    setIsOpen(true);
+  };
+
   const table = useReactTable({
     data: Employees || [],
-    columns: columns,
+    columns: columns({ handleClickEdit }),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -38,12 +52,14 @@ export const ConductoresPage = () => {
 
   return (
     <Container>
-      <Card tittle="Conductores" toolbar={<ModalUploadFile />}>
+      <Card tittle="Empleados" toolbar={<div>  <ModalNewEmployee />
+        <ModalUploadFile />
+      </div>}>
         <DataTable
           table={table}
-          columns={columns}
+          columns={columns({ handleClickEdit })}
           footer={<Pagination table={table} />}
-          nameTable="Lista de Conductores"
+          nameTable="Lista de Empleados"
           filterGlobal={
             <div className="input-group w-25">
               <div className="input-group-prepend">
@@ -61,6 +77,9 @@ export const ConductoresPage = () => {
           }
         />
       </Card>
+      <ModalUpdateEmployee employee={selectedEmployees}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen} />
     </Container>
   );
 };

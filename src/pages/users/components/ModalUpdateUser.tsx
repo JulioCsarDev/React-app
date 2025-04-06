@@ -16,17 +16,17 @@ export const ModalUpdateUser = ({ user, isOpen, setIsOpen }: Props) => {
   const { mutate: updateMutate } = useUpdateUser();
 
   const UsersSchema = Yup.object().shape({
-    name_surname: Yup.string().required("El Nombre es requerido"),
-    email_user: Yup.string().required("El Correo es requerido"),
-    pass_user: Yup.string().required("La contraseña es requerida"),
+    name: Yup.string().required("El Nombre es requerido"),
+    email: Yup.string().required("El Correo es requerido"),
+    password: Yup.string().required("La contraseña es requerida"),
   });
 
   const updateFormik = useFormik({
     initialValues: {
       id: user?.id || 0,
-      name: user?.name_surname || "",
-      email: user?.email_user || "",
-      password: user?.pass_user || "",
+      name: user?.name || "",
+      email: user?.email || "",
+      password: user?.password || "",
     },
     validationSchema: UsersSchema,
     onSubmit: async (values) => {
@@ -49,12 +49,7 @@ export const ModalUpdateUser = ({ user, isOpen, setIsOpen }: Props) => {
       }).then((result) => {
         if (result.isConfirmed) {
           updateMutate(
-            {
-              id: values.id,
-              name_surname: values.name,
-              email_user: values.email,
-              pass_user: values.password,
-            },
+            values,
             {
               onSuccess: () => {
                 updateFormik.resetForm();
@@ -68,10 +63,12 @@ export const ModalUpdateUser = ({ user, isOpen, setIsOpen }: Props) => {
   });
 
   useEffect(() => {
-    updateFormik.setFieldValue("id", user?.id);
-    updateFormik.setFieldValue("name", user?.name_surname);
-    updateFormik.setFieldValue("email", user?.email_user);
-    updateFormik.setFieldValue("password", user?.pass_user);
+    if (user) {
+      updateFormik.setFieldValue("id", user?.id);
+      updateFormik.setFieldValue("name", user?.name);
+      updateFormik.setFieldValue("email", user?.email);
+      updateFormik.setFieldValue("password", user?.password);
+    }
   }, [user]);
 
   return (
@@ -90,11 +87,10 @@ export const ModalUpdateUser = ({ user, isOpen, setIsOpen }: Props) => {
                 </label>
                 <input
                   name="name"
-                  className={`form-control ${
-                    updateFormik.errors.name && updateFormik.touched.name
-                      ? "border-danger"
-                      : ""
-                  }`}
+                  className={`form-control ${updateFormik.errors.name && updateFormik.touched.name
+                    ? "border-danger"
+                    : ""
+                    }`}
                   placeholder="Nombre"
                   type="text"
                   value={updateFormik.values.name}
@@ -116,12 +112,11 @@ export const ModalUpdateUser = ({ user, isOpen, setIsOpen }: Props) => {
                 </label>
                 <input
                   name="password"
-                  className={`form-control ${
-                    updateFormik.errors.password &&
+                  className={`form-control ${updateFormik.errors.password &&
                     updateFormik.touched.password
-                      ? "border-danger"
-                      : ""
-                  }`}
+                    ? "border-danger"
+                    : ""
+                    }`}
                   placeholder="Contraseña"
                   type="text"
                   value={updateFormik.values.password}
@@ -145,11 +140,10 @@ export const ModalUpdateUser = ({ user, isOpen, setIsOpen }: Props) => {
                 </label>
                 <input
                   name="email"
-                  className={`form-control ${
-                    updateFormik.errors.email && updateFormik.touched.email
-                      ? "border-danger"
-                      : ""
-                  }`}
+                  className={`form-control ${updateFormik.errors.email && updateFormik.touched.email
+                    ? "border-danger"
+                    : ""
+                    }`}
                   placeholder="Correo"
                   type="text"
                   value={updateFormik.values.email}

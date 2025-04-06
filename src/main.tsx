@@ -6,6 +6,7 @@ import "../public/css/style.css";
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 import { ProvidersWrapper } from "./providers/ProvidersWrapper.tsx";
 
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ProvidersWrapper>

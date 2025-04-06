@@ -1,8 +1,10 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router-dom";
 import { toAbsoluteUrl } from "../../utils/Assets";
-import { Children } from "react";
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
-export const Sidebar = () => {
+export const SidebarMenu = () => {
+  const location = useLocation();
+
   const menuItems = [
     {
       id: 1,
@@ -13,140 +15,154 @@ export const Sidebar = () => {
     {
       id: 2,
       title: "Distribucion",
-      Clildren: [
-        { id: 1, title: "Empleados", path: "/employees", icon: "people" },
+      icon: "grid",
+      children: [
+        {
+          id: 1,
+          title: "Empleados",
+          path: "/employees",
+          icon: "people"
+        },
       ],
     },
     {
       id: 3,
       title: "Flota",
-      Children: [
-        { id: 1, title: "Vehiculos", path: "/vehicles", icon: "car-front" },
-        { id: 2, title: "Conductores", path: "/drivers", icon: "person" },
+      icon: "truck",
+      children: [
+        {
+          id: 1,
+          title: "Vehiculos",
+          path: "/vehicles",
+          icon: "car-front"
+        },
+        {
+          id: 2,
+          title: "Conductores",
+          path: "/drivers",
+          icon: "person"
+        },
       ],
-    },
-    {
-      id: 3,
-      title: "SST",
-      Children: [
-        { id: 1, title: "Botiquin", path: "/kit", icon: "" },
-        { id: 2, title: "Cajas Fuertes", path: "/safe", icon: "" },
-      ],
-    },
-    {
-      id: 2,
-      title: "Usuarios",
-      path: "users",
-      icon: "people",
     },
     {
       id: 4,
-      title: "Vehiculos",
-      path: "/vehiculos",
-      icon: "car-front-fill",
+      title: "SST",
+      icon: "shield-lock",
+      children: [
+        {
+          id: 1,
+          title: "Botiquin",
+          path: "/kit",
+          icon: "box2-heart"
+        },
+        {
+          id: 2,
+          title: "Cajas Fuertes",
+          path: "/safe",
+          icon: "lock"
+        },
+      ],
     },
     {
       id: 5,
+      title: "Usuarios",
+      path: "/users",
+      icon: "people",
+    },
+    {
+      id: 6,
       title: "Reportes",
       icon: "file-earmark-arrow-down",
     },
   ];
 
   return (
-    <div
-      className="d-flex justify-content-between flex-column darky"
-      style={{ width: "300px" }}
-    >
-      <div style={{ height: "100%", position: "fixed" }}>
-        <div className="d-flex px-3 pt-3 text-white" style={{ height: "14%" }}>
-          <img
-            style={{ height: "100px", width: "200px" }}
-            src={toAbsoluteUrl("/media/logo.png")}
-          />
-        </div>
-        <div className="d-flex flex-column pt-4" style={{ height: "80%" }}>
-          {menuItems.map((item) => (
-            <>
-              {item.Children ? (
-                <div key={item.id} className="dropdown">
-                  <button
-                    className="btn btn-outline-secondary text-white dropdown-toggle"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <i className={`bi bi-${item.icon} pe-2`}></i>
-                    {item.title}
-                  </button>
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                  >
-                    {item.Children.map((child) => (
-                      <li key={child.id}>
-                        <Link
-                          to={child.path}
-                          className="dropdown-item text-white"
-                        >
-                          <ul
-                            className="collapse show nav flex-column ms-1"
-                            id="submenu1"
-                            data-bs-parent="#menu"
-                          >
-                            <li className="w-100">
-                              <a href="#" className="nav-link px-0">
-                                {" "}
-                                <span className="d-none d-sm-inline">
-                                  {child.title}
-                                </span>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="#" className="nav-link px-0">
-                                {" "}
-                                <span className="d-none d-sm-inline">
-                                  {child.title}
-                                </span>
-                              </a>
-                            </li>
-                          </ul>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : item.path ? (
-                <Link
-                  key={item.id}
-                  to={item.path}
-                  className="btn btn-outline-secondary text-white mb-2"
-                >
-                  <i className={`bi bi-${item.icon} pe-2`}></i>
-                  {item.title}
-                </Link>
-              ) : (
-                <button
-                  key={item.id}
-                  className="btn btn-outline-secondary text-white mb-2"
-                >
-                  <i className={`bi bi-${item.icon} pe-2`}></i>
-                  {item.title}
-                </button>
-              )}
-            </>
-          ))}
-        </div>
-        <div
-          className="d-flex justify-content-center align-items-center"
-          style={{ height: "6%" }}
-        >
-          <button className="btn btn-outline-secondary text-white btn-hover-danger">
-            <i className="bi bi-box-arrow-right pe-2"></i>
-            Cerrar Sesión
-          </button>
-        </div>
+    <Sidebar backgroundColor="#212529" style={{ height: "100vh" }}>
+      <div className="d-flex justify-content-center align-items-center" style={{ height: "15vh" }}>
+        <img
+          style={{ height: "100px", width: "200px" }}
+          src={toAbsoluteUrl("/media/logo.png")}
+        />
       </div>
-    </div>
+      <Menu
+        style={{ height: "70vh" }}
+        menuItemStyles={{
+          button: ({ level, active }) => {
+            if (level === 0)
+              return {
+                color: 'white',
+                backgroundColor: active ? 'rgba(255, 255, 255, 0.1)' : undefined,
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+                borderRadius: '20px',
+                marginInline: '5px',
+                marginBottom: '5px',
+              };
+          },
+        }}
+      >
+        {menuItems.map((item) => {
+          const isActive = location.pathname === item.path;
+          const isSubMenuActive = item.children?.some(child => location.pathname === child.path);
+
+          if (item.children) {
+            return (
+              <SubMenu
+                key={item.id}
+                label={item.title}
+                icon={<i className={`bi bi-${item.icon}`}></i>}
+                className="text-white"
+                defaultOpen={isSubMenuActive}
+              >
+                {item.children.map((child) => (
+                  <div className="darky" key={child.id}>
+                    <div className={`${location.pathname === child.path ? '' : 'menu-hover-custom'}`}>
+                      <MenuItem
+                        icon={<i className={`bi bi-${child.icon}`}></i>}
+                        style={{
+                          color: "white",
+                          backgroundColor: location.pathname === child.path ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                          borderRadius: location.pathname === child.path ? '20px' : undefined,
+                          marginInline: "5px",
+                        }}
+                        component={<Link
+                          className="text-decoration-none text-white"
+                          to={child.path}
+                        >
+                          {child.title}
+                        </Link>}
+                      >
+                        {child.title}
+                      </MenuItem>
+                    </div>
+                  </div>
+                ))}
+              </SubMenu>
+            );
+          }
+          return (
+            <div className={`${isActive ? '' : 'menu-hover-custom'}`} key={item.id}>
+              <MenuItem
+                icon={<i className={`bi bi-${item.icon}`}></i>}
+                style={{
+                  backgroundColor: isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
+                }}
+                component={<Link className="text-decoration-none text-white" to={item.path || "#"}>{item.title}</Link>}
+              >
+                {item.title}
+              </MenuItem>
+            </div>
+          );
+        })}
+      </Menu>
+      <div className="d-flex align-items-end justify-content-center pb-2" style={{ height: "15vh" }}>
+
+        <button className="btn btn-outline-secondary text-white btn-hover-danger">
+          <i className="bi bi-box-arrow-right pe-2"></i>
+          Cerrar Sesión
+        </button>
+      </div>
+    </Sidebar>
   );
 };
