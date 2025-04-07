@@ -15,8 +15,12 @@ import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
 import { ModalUploadFile } from "./components/ModalUploadFile";
 import { ModalNewEmployee } from "./components/ModalNewEmployee";
-import { UpdateEmployeesModel } from "./models/employees.models";
+import {
+  EmployeesModel,
+  UpdateEmployeesModel,
+} from "./models/employees.models";
 import { ModalUpdateEmployee } from "./components/ModalUploadEmployees";
+import { ModalDetailEmployee } from "./components/ModalDetailEmployee";
 
 export const EmployeesPage = () => {
   const { data: Employees } = useEmployees();
@@ -24,20 +28,28 @@ export const EmployeesPage = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const [selectedEmployees, setSelectedEmployees] = useState<UpdateEmployeesModel | null>(
-    null
-  );
+  const [selectedEmployees, setSelectedEmployees] =
+    useState<UpdateEmployeesModel | null>(null);
+
+  const [selectedEmployeesDetail, setSelectedEmployeesDetail] =
+    useState<EmployeesModel | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModelDetail, setIsOpenModalDetail] = useState(false);
 
   const handleClickEdit = (employees: UpdateEmployeesModel) => {
     setSelectedEmployees(employees);
     setIsOpen(true);
   };
 
+  const handleClickDetail = (employee: EmployeesModel) => {
+    setSelectedEmployeesDetail(employee);
+    setIsOpenModalDetail(true);
+  };
+
   const table = useReactTable({
     data: Employees || [],
-    columns: columns({ handleClickEdit }),
+    columns: columns({ handleClickEdit, handleClickDetail }),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -52,12 +64,19 @@ export const EmployeesPage = () => {
 
   return (
     <Container>
-      <Card tittle="Empleados" toolbar={<div>  <ModalNewEmployee />
-        <ModalUploadFile />
-      </div>}>
+      <Card
+        tittle="Empleados"
+        toolbar={
+          <div>
+            {" "}
+            <ModalNewEmployee />
+            <ModalUploadFile />
+          </div>
+        }
+      >
         <DataTable
           table={table}
-          columns={columns({ handleClickEdit })}
+          columns={columns({ handleClickEdit, handleClickDetail })}
           footer={<Pagination table={table} />}
           nameTable="Lista de Empleados"
           filterGlobal={
@@ -77,9 +96,16 @@ export const EmployeesPage = () => {
           }
         />
       </Card>
-      <ModalUpdateEmployee employee={selectedEmployees}
+      <ModalUpdateEmployee
+        employee={selectedEmployees}
         isOpen={isOpen}
-        setIsOpen={setIsOpen} />
+        setIsOpen={setIsOpen}
+      />
+      <ModalDetailEmployee
+        employee={selectedEmployeesDetail}
+        isOpenModalDetail={isOpenModelDetail}
+        setIsOpenModalDetail={setIsOpenModalDetail}
+      />
     </Container>
   );
 };
