@@ -1,6 +1,6 @@
 import { Container } from "../../components/container/Container";
 import Card from "../../components/layout/Card";
-import { columns } from "../products/components/Columns";
+import { columns } from "./components/Columns";
 import {
   useReactTable,
   getCoreRowModel,
@@ -14,6 +14,7 @@ import { useEmployees } from "../products/hooks/useEmployees";
 import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
 import { ModalUploadFile } from "../products/components/ModalUploadFile";
+import { VehiclesModel } from "./models/vehicles.models";
 
 export const VehiculosPage = () => {
   const { data: Employees } = useEmployees();
@@ -21,9 +22,24 @@ export const VehiculosPage = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const [selectedVehicle, setSelectedVehicle] = useState<VehiclesModel | null>(
+    null
+  );
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModelDetail, setIsOpenModalDetail] = useState(false);
+
+  const handleClickEdit = (vehicles: VehiclesModel) => {
+    setSelectedVehicle(vehicles);
+    setIsOpen(true);
+  };
+  const handleClickDetail = (vehicles: VehiclesModel) => {
+    setSelectedVehicle(vehicles);
+    setIsOpenModalDetail(true);
+  };
+
   const table = useReactTable({
     data: Employees || [],
-    columns: columns,
+    columns: columns({ handleClickEdit, handleClickDetail }),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -41,7 +57,7 @@ export const VehiculosPage = () => {
       <Card tittle="Vehiculos" toolbar={<ModalUploadFile />}>
         <DataTable
           table={table}
-          columns={columns}
+          columns={columns({ handleClickEdit, handleClickDetail })}
           footer={<Pagination table={table} />}
           nameTable="Lista de Vehiculos"
           filterGlobal={
