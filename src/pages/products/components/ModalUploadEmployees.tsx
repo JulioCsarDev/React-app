@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const ModalUpdateEmployee = ({ employee, isOpen, setIsOpen }: Props) => {
-  const openModal = () => setIsOpen(true);
+
 
   const { mutate: updateMutate } = useUpdateEmployee();
 
@@ -34,7 +34,7 @@ export const ModalUpdateEmployee = ({ employee, isOpen, setIsOpen }: Props) => {
     validationSchema: UpdateEmployeesSchema,
     onSubmit: async (values) => {
       Swal.fire({
-        title: "Actualizar Conductor",
+        title: "Actualizar Empleado",
         text: "Se guardaran los datos ingresados.",
         icon: "question",
         showCancelButton: true,

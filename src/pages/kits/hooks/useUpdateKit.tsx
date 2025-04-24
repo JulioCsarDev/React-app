@@ -1,30 +1,30 @@
-import { toast } from "sonner";
 import { useMutation } from "react-query";
+import { toast } from "sonner";
 import { queryClient } from "../../../providers";
-import { RegisterNewEmployee } from "../services/employees.services";
+import { UploadKit } from "../services/kits.services";
 
-export const useRegisterEmployee = () => {
+export const useUpdateKit = () => {
     const mutation = useMutation({
-        mutationFn: RegisterNewEmployee,
+        mutationFn: UploadKit,
 
         onMutate: () => {
-            toast.loading("Registrando Empleador", {
+            toast.loading("Actualizando Kit", {
                 description: "Por favor espere un momento",
             });
         },
         onSuccess: () => {
             toast.dismiss();
             queryClient.invalidateQueries({
-                queryKey: ["employees"],
+                queryKey: ["kits"],
             });
-            toast.success("✅ Empleado Registrado!", {
-                description: "El empleado fue registrado correctamente",
+            toast.success("✅ ¡Kit Actualizado!", {
+                description: "El kit fue actulizado correctamente",
             });
         },
         onError: (error: any) => {
             toast.dismiss();
             // Verifica si el error es un objeto con la propiedad 'response'
-            let errorMessage = "Error al registrar el empleado";
+            let errorMessage = "Error al actualizar el kit";
 
             if (error?.response?.data?.detail) {
                 // Si existe 'response' y 'detail', accede al detalle del error
@@ -39,6 +39,5 @@ export const useRegisterEmployee = () => {
             });
         },
     });
-
     return mutation;
 };

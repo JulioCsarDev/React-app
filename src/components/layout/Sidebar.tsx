@@ -52,7 +52,7 @@ export const SidebarMenu = () => {
         {
           id: 1,
           title: "Botiquin",
-          path: "/kit",
+          path: "/kits",
           icon: "box2-heart",
         },
         {

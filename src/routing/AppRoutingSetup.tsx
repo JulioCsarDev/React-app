@@ -6,6 +6,7 @@ import { UsersPage } from "../pages/users/UsersPage";
 import { ConductoresPage } from "../pages/drivers/ConductoresPage";
 import { VehiculosPage } from "../pages/vehiculos/VehiculosPages";
 import { EmployeesPage } from "../pages/products/EmployeesPage";
+import { KitPage } from "../pages/kits/KitPage";
 
 export const AppRoutingSetup = (): ReactElement => {
   return (
@@ -16,6 +17,7 @@ export const AppRoutingSetup = (): ReactElement => {
         <Route path="/drivers" element={<ConductoresPage />} />
         <Route path="/vehiculos" element={<VehiculosPage />} />
         <Route path="/employees" element={<EmployeesPage />} />
+        <Route path="/kits" element={<KitPage />} />
       </Route>
     </Routes>
   );
