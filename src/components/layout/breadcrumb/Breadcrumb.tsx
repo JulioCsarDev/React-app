@@ -18,8 +18,8 @@ const Breadcrumb = () => {
       path: "/users",
     },
     {
-      title: "Productos",
-      path: "/products",
+      title: "Empleados",
+      path: "/employees",
     },
   ];
 

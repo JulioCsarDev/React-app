@@ -10,35 +10,39 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 import { DataTable } from "../../components/datatable/DataTable";
-import { useEmployees } from "../employees/hooks/useEmployees";
 import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
-import { ModalUploadFile } from "../employees/components/ModalUploadFile";
-import { VehiclesModel } from "./models/vehicles.models";
+import { ModalNewsafe as ModalNewSafe } from "./components/ModalNewSafe";
+import { ModalUpdatesafe as ModalUpdateSafe } from "./components/ModalUpdateSafe";
+import { ModalDetailsafe as ModalDetailSafe } from "./components/ModalDetailSafe";
+import { SafeUpdateSafeModel } from "./models/safe.models";
 
-export const VehiculosPage = () => {
-  const { data: Employees } = useEmployees();
+
+
+export const SafePage = () => {
+  const { data: Safe } = useSafes();
 
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const [selectedVehicle, setSelectedVehicle] = useState<VehiclesModel | null>(
+  const [selectedSafe, setSelectedSafe] = useState<SafeUpdateSafeModel | null>(
     null
   );
+
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModelDetail, setIsOpenModalDetail] = useState(false);
 
-  const handleClickEdit = (vehicles: VehiclesModel) => {
-    setSelectedVehicle(vehicles);
+  const handleClickEdit = (Safe: SafeUpdateSafeModel) => {
+    setSelectedSafe(Safe);
     setIsOpen(true);
   };
-  const handleClickDetail = (vehicles: VehiclesModel) => {
-    setSelectedVehicle(vehicles);
+  const handleClickDetail = (Safe: SafeUpdateSafeModel) => {
+    setSelectedSafe(Safe);
     setIsOpenModalDetail(true);
   };
 
   const table = useReactTable({
-    data: Employees || [],
+    data: Safe || [],
     columns: columns({ handleClickEdit, handleClickDetail }),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -54,12 +58,19 @@ export const VehiculosPage = () => {
 
   return (
     <Container>
-      <Card tittle="Vehiculos" toolbar={<ModalUploadFile />}>
+      <Card
+        tittle="Caja fuerte"
+        toolbar={
+          <div>
+            <ModalNewSafe></ModalNewSafe>
+          </div>
+        }
+      >
         <DataTable
           table={table}
           columns={columns({ handleClickEdit, handleClickDetail })}
           footer={<Pagination table={table} />}
-          nameTable="Lista de Vehiculos"
+          nameTable="Lista de Conductores"
           filterGlobal={
             <div className="input-group w-25">
               <div className="input-group-prepend">
@@ -77,6 +88,20 @@ export const VehiculosPage = () => {
           }
         />
       </Card>
+      <ModalUpdateSafe
+        safe={selectedSafe}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+      <ModalDetailSafe
+        safe={selectedSafe}
+        isOpenModalDetail={isOpenModelDetail}
+        setIsOpenModalDetail={setIsOpenModalDetail}
+      />
     </Container>
   );
 };
+function useSafes(): { data: any; } {
+  throw new Error("Function not implemented.");
+}
+

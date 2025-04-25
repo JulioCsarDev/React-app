@@ -5,7 +5,7 @@ import { BasePage } from "../pages/base/BasePage";
 import { UsersPage } from "../pages/users/UsersPage";
 import { ConductoresPage } from "../pages/drivers/ConductoresPage";
 import { VehiculosPage } from "../pages/vehiculos/VehiculosPages";
-import { EmployeesPage } from "../pages/products/EmployeesPage";
+import { EmployeesPage } from "../pages/employees/EmployeesPage";
 import { KitPage } from "../pages/kits/KitPage";
 
 export const AppRoutingSetup = (): ReactElement => {

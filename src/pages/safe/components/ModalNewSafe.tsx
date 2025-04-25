@@ -1,17 +1,17 @@
 import * as Yup from "yup";
 import { useState } from "react";
-import { useRegisterKit } from "../hooks/useRegisterKit";
+
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import { Modal } from "react-bootstrap";
 
-export const ModalNewkit = () => {
+export const ModalNewsafe = () => {
     const [isOpen, setIsOpen] = useState(false);
     const openModal = () => setIsOpen(true);
 
-    const { mutate: registerMutate } = useRegisterKit();
+    const { mutate: registerMutate } = useRegisterSafe();
 
-    const KitSchema = Yup.object().shape({
+    const safeSchema = Yup.object().shape({
         placa: Yup.string().required("La placa es requerida"),
         gasas_limpias: Yup.boolean().required("Campo requerido"),
         esparadrapo_tela: Yup.boolean().required("Campo requerido"),
@@ -55,7 +55,7 @@ export const ModalNewkit = () => {
             manual_primeros_auxilios: false,
             observacion: "",
         },
-        validationSchema: KitSchema,
+        validationSchema: safeSchema,
         onSubmit: async (values) => {
               Swal.fire({
                 title: "Registrar Conductor",
@@ -386,3 +386,7 @@ export const ModalNewkit = () => {
         </>
     );
 };
+
+function useRegisterSafe(): { mutate: any; } {
+    throw new Error("Function not implemented.");
+}
