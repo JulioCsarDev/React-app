@@ -3,7 +3,7 @@ import { useDeleteSafe } from "../hooks/useDeleteSafe";
 
 
 
-export const Deletesafe = ({ id_insppeccion_safe }: { id_insppeccion_safe: number }) => {
+export const DeleteSafe = ({ id_insppeccion_safe }: { id_insppeccion_safe: number }) => {
   const { mutate: deleteMutate } = useDeleteSafe();
 
   const handleDelete = () => {

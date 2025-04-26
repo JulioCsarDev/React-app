@@ -13,7 +13,7 @@ import { DataTable } from "../../components/datatable/DataTable";
 import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
 import { ModalNewsafe as ModalNewSafe } from "./components/ModalNewSafe";
-import { ModalUpdatesafe as ModalUpdateSafe } from "./components/ModalUpdateSafe";
+import { ModalUpdateSafe as ModalUpdateSafe } from "./components/ModalUpdateSafe";
 import { ModalDetailsafe as ModalDetailSafe } from "./components/ModalDetailSafe";
 import { SafeUpdateSafeModel } from "./models/safe.models";
 
@@ -88,11 +88,13 @@ export const SafePage = () => {
           }
         />
       </Card>
-      <ModalUpdateSafe
-        safe={selectedSafe}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
+      {selectedSafe && (
+        <ModalUpdateSafe
+          safe={selectedSafe}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
+      )}
       <ModalDetailSafe
         safe={selectedSafe}
         isOpenModalDetail={isOpenModelDetail}

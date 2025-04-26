@@ -94,7 +94,7 @@ export const ModalNewsafe = () => {
             </button>
             <Modal size="lg" show={isOpen} onHide={() => setIsOpen(false)}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Agregar Inspeccion</Modal.Title>
+                    <Modal.Title>ccion</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form>

@@ -1,15 +1,14 @@
-import { useMutation } from "react-query";
+import { useMutation } from "react-query"
 import { toast } from "sonner";
 import { queryClient } from "../../../providers";
-import { UploadSafe } from "../services/safe.services";
+import { RegisterNewSafe } from "../services/safe.services";
 
-
-export const useUpdatesafe = () => {
+export const useRegistersafe = () => {
     const mutation = useMutation({
-        mutationFn: UploadSafe,
+        mutationFn: RegisterNewSafe,
 
         onMutate: () => {
-            toast.loading("Actualizando safe", {
+            toast.loading("Registrando safe", {
                 description: "Por favor espere un momento",
             });
         },
@@ -18,19 +17,20 @@ export const useUpdatesafe = () => {
             queryClient.invalidateQueries({
                 queryKey: ["safes"],
             });
-            toast.success("✅ ¡Botiquin Actualizado!", {
-                description: "El safe fue actulizado correctamente",
+            toast.success("✅ ¡safe Registrado!", {
+                description: "El safe fue registrado correctamente",
             });
         },
         onError: (error: any) => {
             toast.dismiss();
-   
-            let errorMessage = "Error al actualizar el safe";
+            // Verifica si el error es un objeto con la propiedad 'response'
+            let errorMessage = "Error al registrar el safe";
 
             if (error?.response?.data?.detail) {
+                // Si existe 'response' y 'detail', accede al detalle del error
                 errorMessage = error.response.data.detail;
             } else if (error?.message) {
-
+                // Si el error tiene un mensaje general, usa ese mensaje
                 errorMessage = error.message;
             }
 
@@ -38,6 +38,7 @@ export const useUpdatesafe = () => {
                 description: errorMessage,
             });
         },
-    });
+   });
+    
     return mutation;
 };
