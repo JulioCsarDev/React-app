@@ -1,5 +1,5 @@
 import { api } from "../../../config/axios.instance";
-import { KitModel, RegisterKitModel } from "../models/kit.models";
+import { KitModel } from "../models/kit.models";
 
 export const DeleteKit = async (id_kit: number) => {
   console.log(id_kit);
@@ -11,7 +11,7 @@ export const GetAllKits = async () => {
   return data;
 };
 
-export const RegisterNewKit = async (driver: RegisterKitModel) => {
+export const RegisterNewKit = async (driver: KitModel) => {
   const { data } = await api.post("/drivers/create_driver", driver);
   return data;
 };

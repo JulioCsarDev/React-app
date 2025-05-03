@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import Swal from "sweetalert2";
 import { Modal } from "react-bootstrap";
+import { useRegisterSafe } from "../hooks/useRegisterSafe";
 
 export const ModalNewsafe = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -75,7 +76,7 @@ export const ModalNewsafe = () => {
                 },
               }).then((result) => {
                   if (result.isConfirmed) {
-                    registerMutate(values, {
+                    registerMutate({ ...values, placa_vehiculo: values.placa }, {
                       onSuccess: () => {
                         registerFormik.resetForm();
                         setIsOpen(false);
@@ -387,6 +388,3 @@ export const ModalNewsafe = () => {
     );
 };
 
-function useRegisterSafe(): { mutate: any; } {
-    throw new Error("Function not implemented.");
-}

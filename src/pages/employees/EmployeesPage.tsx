@@ -21,6 +21,7 @@ import {
 } from "./models/employees.models";
 import { ModalUpdateEmployee } from "./components/ModalUploadEmployees";
 import { ModalDetailEmployee } from "./components/ModalDetailEmployee";
+import { ModalIndicators } from "./components/ModalIndicators";
 
 export const EmployeesPage = () => {
   const { data: Employees } = useEmployees();
@@ -37,6 +38,8 @@ export const EmployeesPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenModelDetail, setIsOpenModalDetail] = useState(false);
 
+  const [isOpenModelIndicator, setIsOpenModalIndicator] = useState(false);
+
   const handleClickEdit = (employees: UpdateEmployeesModel) => {
     setSelectedEmployees(employees);
     setIsOpen(true);
@@ -47,9 +50,13 @@ export const EmployeesPage = () => {
     setIsOpenModalDetail(true);
   };
 
+  const handleClickIndicator = (employee: EmployeesModel) => {
+    setSelectedEmployees(employee);
+    setIsOpenModalIndicator(true);
+  };
   const table = useReactTable({
     data: Employees || [],
-    columns: columns({ handleClickEdit, handleClickDetail }),
+    columns: columns({ handleClickEdit, handleClickDetail,handleClickIndicator }),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -76,7 +83,7 @@ export const EmployeesPage = () => {
       >
         <DataTable
           table={table}
-          columns={columns({ handleClickEdit, handleClickDetail })}
+          columns={columns({ handleClickEdit, handleClickDetail,handleClickIndicator })}
           footer={<Pagination table={table} />}
           nameTable="Lista de Empleados"
           filterGlobal={
@@ -100,6 +107,11 @@ export const EmployeesPage = () => {
         employee={selectedEmployees}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
+      />
+      <ModalIndicators       
+          employee={selectedEmployeesDetail}
+          isOpenModalIndicator={isOpenModelIndicator}
+          setIsOpenModalIndicator={setIsOpenModalIndicator}
       />
       <ModalDetailEmployee
         employee={selectedEmployeesDetail}

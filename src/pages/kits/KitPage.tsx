@@ -70,7 +70,7 @@ export const KitPage = () => {
           table={table}
           columns={columns({ handleClickEdit, handleClickDetail })}
           footer={<Pagination table={table} />}
-          nameTable="Lista de Conductores"
+          nameTable="Lista de inspecciones de botiquines"
           filterGlobal={
             <div className="input-group w-25">
               <div className="input-group-prepend">

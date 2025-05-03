@@ -3,7 +3,7 @@ import { toast } from "sonner";
 import { queryClient } from "../../../providers";
 import { RegisterNewSafe } from "../services/safe.services";
 
-export const useRegistersafe = () => {
+export const useRegisterSafe = () => {
     const mutation = useMutation({
         mutationFn: RegisterNewSafe,
 

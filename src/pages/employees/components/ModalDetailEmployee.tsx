@@ -72,7 +72,7 @@ export const ModalDetailEmployee = ({
               <div className="col w-100">
                 <ul className="list-group list-group-flush border-bottom">
                   <li className="list-group-item p-4 ">
-                    <i className="bi bi-calendar-event me-2 fs-4"></i>
+                    <i className="bi bi-building-fill me-2 fs-4"></i>
                     <strong className="">Centro:</strong> {employee?.CENTRO}
                   </li>
                 </ul>

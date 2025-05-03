@@ -5,11 +5,13 @@ import { DeleteEmployee } from "./DeleteEmployees";
 interface ColumnsProps {
   handleClickEdit: (employee: EmployeesModel) => void;
   handleClickDetail: (employee: EmployeesModel) => void;
+  handleClickIndicator: (employee: EmployeesModel) => void;
 }
 
 export const columns = ({
   handleClickEdit,
   handleClickDetail,
+  handleClickIndicator,
 }: ColumnsProps): ColumnDef<EmployeesModel>[] => [
   {
     accessorKey: "number",
@@ -48,9 +50,12 @@ export const columns = ({
           >
             <i className="bi bi-eye"></i>
           </button>
-          <button className="btn btn-sm btn-outline-success">
+          <button
+            className="btn btn-sm btn-outline-success"
+            onClick={() => handleClickIndicator(row.original)}
+          >
             <i className="bi bi-bar-chart-line"></i>
-          </button>
+          </button>          
           <button
             className="btn btn-sm btn-outline-primary"
             onClick={() => handleClickEdit(row.original)}

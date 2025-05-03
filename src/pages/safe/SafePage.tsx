@@ -16,6 +16,7 @@ import { ModalNewsafe as ModalNewSafe } from "./components/ModalNewSafe";
 import { ModalUpdateSafe as ModalUpdateSafe } from "./components/ModalUpdateSafe";
 import { ModalDetailsafe as ModalDetailSafe } from "./components/ModalDetailSafe";
 import { SafeUpdateSafeModel } from "./models/safe.models";
+import { useSafes } from "./hooks/useSafes";
 
 
 
@@ -70,7 +71,7 @@ export const SafePage = () => {
           table={table}
           columns={columns({ handleClickEdit, handleClickDetail })}
           footer={<Pagination table={table} />}
-          nameTable="Lista de Conductores"
+          nameTable="Lista de inspecciones de cajas fuertes"
           filterGlobal={
             <div className="input-group w-25">
               <div className="input-group-prepend">
@@ -103,7 +104,4 @@ export const SafePage = () => {
     </Container>
   );
 };
-function useSafes(): { data: any; } {
-  throw new Error("Function not implemented.");
-}
 
