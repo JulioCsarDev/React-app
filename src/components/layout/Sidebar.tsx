@@ -74,6 +74,12 @@ export const SidebarMenu = () => {
       title: "Reportes",
       icon: "file-earmark-arrow-down",
     },
+    {
+      id: 7,
+      title: "Cashless",
+      path: "/Cashless",
+      icon: "telephone",
+    },
   ];
 
   return (

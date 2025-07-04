@@ -27,6 +27,12 @@ export const BasePage = () => {
       path: "/sst",
       icon: "shield-lock",
     },
+    {
+      id: 5,
+      title: " Centro de contacto",
+      path: "/cashless",
+      icon: "telephone",
+    },
   ];
 
   return (

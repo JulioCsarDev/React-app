@@ -3,6 +3,7 @@ import { DriverModel, RegisterDriverModel } from "../models/conductor.models";
 
 export const GetAllDrivers = async () => {
   const { data } = await api.get("/drivers/get_all_drivers");
+  console.log("Datos recibidos del backend:", data);
   return data;
 };
 

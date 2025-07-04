@@ -3,6 +3,7 @@ import { RegisterEmployeesModel, UpdateEmployeesModel } from "../models/employee
 
 export const GetAllEmployees = async () => {
   const { data } = await api.get("/employees/get_all_employees");
+  console.log("Datos recibidos del backend:", data);
   return data;
 };
 

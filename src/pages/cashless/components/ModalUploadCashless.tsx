@@ -3,9 +3,8 @@ import { useState, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { queryClient } from "../../../providers";
 import { toAbsoluteUrl } from "../../../utils/Assets";
-import { UploadFile } from "../services/drivers.services";
 
-export const ModalUploadFile = () => {
+export const UploadCashless = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
 
@@ -19,8 +18,6 @@ export const ModalUploadFile = () => {
       fileInputRef.current.value = "";
     }
   };
-
- 
 
   const handleUpdloadFile = () => {
     Swal.fire({
@@ -64,7 +61,7 @@ export const ModalUploadFile = () => {
           });
 
           if (selectedFile) {
-            await UploadFile(selectedFile);
+            await ModalUploadCashless(selectedFile);
           }
 
           setIsOpen(false);
@@ -76,7 +73,7 @@ export const ModalUploadFile = () => {
 
           Swal.fire({
             title: "Archivo guardado",
-            text: "Se registraron los conductores correctamente",
+            text: "Se registraron los cashless correctamente",
             icon: "success",
             customClass: {
               popup: "max-w-md p-4 bg-white rounded-lg shadow-xl",
@@ -111,7 +108,7 @@ export const ModalUploadFile = () => {
       }
     });
   };
-   
+
   return (
     <>
       <button className="btn btn-outline-primary btn-sm" onClick={openModal}>
@@ -130,8 +127,8 @@ export const ModalUploadFile = () => {
             >
               <div className="card-body d-flex justify-content-center align-items-center flex-column">
                 <img src={toAbsoluteUrl("/media/excelModal.png")} />
-                <h4>Lista EXCEL</h4>
-                <span>Archivo</span>
+                <h4>Lista de de clientes cashless</h4>
+                <span>Archivo de CASHLESS</span>
               </div>
               <input
                 className="d-none"
@@ -182,3 +179,7 @@ export const ModalUploadFile = () => {
     </>
   );
 };
+function ModalUploadCashless(_selectedFile: File) {
+    throw new Error("Function not implemented.");
+}
+

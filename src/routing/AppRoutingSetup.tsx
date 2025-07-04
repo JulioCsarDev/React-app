@@ -8,6 +8,8 @@ import { VehiculosPage } from "../pages/vehiculos/VehiculosPages";
 import { EmployeesPage } from "../pages/employees/EmployeesPage";
 import { KitPage } from "../pages/kits/KitPage";
 import { SafePage } from "../pages/safe/SafePage";
+import { CASHLESSPAGE } from "../pages/cashless/CashlessPage";
+
 
 export const AppRoutingSetup = (): ReactElement => {
   return (
@@ -20,6 +22,7 @@ export const AppRoutingSetup = (): ReactElement => {
         <Route path="/employees" element={<EmployeesPage />} />
         <Route path="/kits" element={<KitPage />} />
         <Route path="/safe" element={<SafePage />} />
+        <Route path="/cashless" element={<CASHLESSPAGE />} />
       </Route>
     </Routes>
   );
