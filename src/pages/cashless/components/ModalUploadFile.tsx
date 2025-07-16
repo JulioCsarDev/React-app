@@ -3,8 +3,10 @@ import { useState, useRef } from "react";
 import { Modal } from "react-bootstrap";
 import { queryClient } from "../../../providers";
 import { toAbsoluteUrl } from "../../../utils/Assets";
+import { UploadFile } from "../services/cashless.services";
 
-export const UploadCashless = () => {
+
+export const ModalUploadFile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
 
@@ -61,14 +63,14 @@ export const UploadCashless = () => {
           });
 
           if (selectedFile) {
-            await ModalUploadCashless(selectedFile);
+            await UploadFile(selectedFile);
           }
 
           setIsOpen(false);
           handleRemoveFile();
 
           queryClient.invalidateQueries({
-            queryKey: ["drivers"],
+            queryKey: ["cashlees"],
           });
 
           Swal.fire({
@@ -179,7 +181,5 @@ export const UploadCashless = () => {
     </>
   );
 };
-function ModalUploadCashless(_selectedFile: File) {
-    throw new Error("Function not implemented.");
-}
+
 

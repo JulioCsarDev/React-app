@@ -13,8 +13,9 @@ import { DataTable } from "../../components/datatable/DataTable";
 import { useEmployees } from "../employees/hooks/useEmployees";
 import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
-import { ModalUploadFile } from "../employees/components/ModalUploadFile";
+
 import { VehiclesModel } from "./models/vehicles.models";
+import { ModalUploadFile } from "../drivers/components/ModalUploadFile";
 
 export const VehiculosPage = () => {
   const { data: Employees } = useEmployees();
@@ -22,11 +23,11 @@ export const VehiculosPage = () => {
   const [globalFilter, setGlobalFilter] = useState("");
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const [selectedVehicle, setSelectedVehicle] = useState<VehiclesModel | null>(
+  const [, setSelectedVehicle] = useState<VehiclesModel | null>(
     null
   );
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenModelDetail, setIsOpenModalDetail] = useState(false);
+  const [, setIsOpen] = useState(false);
+  const [, setIsOpenModalDetail] = useState(false);
 
   const handleClickEdit = (vehicles: VehiclesModel) => {
     setSelectedVehicle(vehicles);

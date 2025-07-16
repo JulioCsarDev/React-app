@@ -55,7 +55,7 @@ export const ModalUpdateCashless = ({ cashless, isOpen, setIsOpen }: Props) => {
   return (
     <Modal show={isOpen} onHide={() => setIsOpen(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Actualizar Novedad</Modal.Title>
+        <Modal.Title>Actualizar novedad de cliente</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <form>

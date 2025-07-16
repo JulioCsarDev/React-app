@@ -13,10 +13,15 @@ import { DataTable } from "../../components/datatable/DataTable";
 import { useCashless } from "./hooks/useCashless";
 import Pagination from "../../components/paginator/Paginator";
 import { useState } from "react";
-import { ModalUploadFile } from "../drivers/components/ModalUploadFile";
+
 import { cashlessModel } from "./models/CashlessModel";
 import { ModalUpdateCashless } from "./components/ModalUpdateCashless";
 import { ModalDetailCashless } from "./components/ModalDetailCashless";
+import { ModalUploadFile } from "./components/ModalUploadFile";
+
+
+
+
 
 
 export const CASHLESSPAGE = () => {
